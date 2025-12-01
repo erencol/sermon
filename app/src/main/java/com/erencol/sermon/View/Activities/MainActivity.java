@@ -65,7 +65,11 @@ public class MainActivity extends AppCompatActivity implements Observer {
         } else if (id == R.id.settingsid) {
             goToSettingsActivity();
             return true;
-        } else {
+        } /* else if (id == R.id.qiblaId) {
+            goToQibla();
+            return true;
+        }*/
+        else {
             return super.onOptionsItemSelected(item);
         }
     }
@@ -82,6 +86,11 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
     public void showAboutActivity(){
         Intent i = new Intent(MainActivity.this, AboutActivity.class);
+        startActivity(i);
+    }
+
+    public void goToQibla(){
+        Intent i = new Intent(MainActivity.this, CompassActivity.class);
         startActivity(i);
     }
 

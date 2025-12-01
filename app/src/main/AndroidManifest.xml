@@ -3,6 +3,8 @@
     package="com.erencol.sermon">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name=".SermonApplication"
@@ -13,9 +15,12 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".View.Activities.CompassActivity"
+            android:exported="false" />
+        <activity
             android:name=".View.Activities.SettingsActivity"
             android:exported="true"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".View.Activities.SpecialDays"
             android:exported="true" />

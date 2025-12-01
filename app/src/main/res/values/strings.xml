@@ -48,5 +48,10 @@ Aenean in arcu laoreet, gravida orci et, faucibus velit. Etiam finibus viverra t
     <string name="sermontitle">sermontitle</string>
     <string name="izim_uygulamas">Çizim Uygulaması</string>
     <string name="font_size">Yazı tipi boyutu</string>
+    <string name="circle">Circle\n</string>
+    <string name="arrow">Arrow\n</string>
+    <string name="compass">Kıble Pusulası</string>
+    <string name="qibla">Kıble Yönü</string>
+    <string name="sermon_image">sermon_image</string>
 
 </resources>
