@@ -3,14 +3,14 @@ package com.erencol.sermon.Data.Service;
 import java.time.LocalDate;
 
 public class Host {
-     static final String baseUrl = "https://mobizoe.com/wp-content/uploads";
+     static final String baseUrl = "https://mobizoe.com/wp-content/uploads/";
 
      public static String getBaseUrl() {
-          return baseUrl+"/"+getYear()+"/"+getMonth()+"/";
+          return baseUrl+getYear()+"/"+getMonth()+"/";
      }
 
      public static String getRetryBaseUrl() {
-          return baseUrl+"/"+getYear()+"/"+getRetryMonth()+"/";
+          return baseUrl+getYear()+"/"+getRetryMonth()+"/";
      }
 
      static String getMonth(){

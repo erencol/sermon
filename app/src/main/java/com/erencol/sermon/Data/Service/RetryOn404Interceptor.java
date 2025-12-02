@@ -11,10 +11,10 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class RetryOn404Interceptor implements Interceptor {
-    private final String fallbackBaseUrl;
+    private final HttpUrl fallbackUrl;
 
     public RetryOn404Interceptor(String fallbackBaseUrl) {
-        this.fallbackBaseUrl = fallbackBaseUrl;
+        this.fallbackUrl = Objects.requireNonNull(HttpUrl.parse(fallbackBaseUrl));
     }
 
     @NonNull
@@ -24,13 +24,14 @@ public class RetryOn404Interceptor implements Interceptor {
         Response response = chain.proceed(request);
 
         if (response.code() == 404) {
-            response.close(); // eski response’u kapatmayı unutma
+            response.close();
 
-            // Yeni URL oluştur
-            HttpUrl newUrl = request.url().newBuilder()
-                    .scheme(Objects.requireNonNull(HttpUrl.parse(fallbackBaseUrl)).scheme())
-                    .host(Objects.requireNonNull(HttpUrl.parse(fallbackBaseUrl)).host())
-                    .port(Objects.requireNonNull(HttpUrl.parse(fallbackBaseUrl)).port())
+            // Orijinal request'in path'ini al
+            String path = request.url().encodedPath();
+
+            // Fallback base URL ile path'i birleştir
+            HttpUrl newUrl = fallbackUrl.newBuilder()
+                    .encodedPath(path)
                     .build();
 
             Request newRequest = request.newBuilder()
