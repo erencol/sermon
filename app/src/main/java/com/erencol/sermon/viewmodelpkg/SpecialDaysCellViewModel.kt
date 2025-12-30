@@ -11,7 +11,11 @@ class SpecialDaysCellViewModel(specialDay: SpecialDay): BaseObservable(){
         return specialDayModel.name
     }
 
-    fun getDayDate():String {
+    fun getDayMiladi():String {
         return specialDayModel.miladi.day.toString() + "." + specialDayModel.miladi.month + " " + specialDayModel.miladi.weekday
+    }
+
+    fun getDayHicri():String {
+        return specialDayModel.hicri.day.toString() + "." + specialDayModel.hicri.month
     }
 }

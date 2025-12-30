@@ -34,6 +34,7 @@
             tools:listitem="@layout/special_days_cell"
             android:stackFromBottom="true"
             android:id="@+id/specialdaysrecyclerview"
+            android:background="@color/dark_gray_bbg"
             android:layout_below="@id/appBarLayout"/>
     </RelativeLayout>
 
