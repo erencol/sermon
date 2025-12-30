@@ -5,6 +5,9 @@ import java.time.LocalDate;
 public class Host {
      static final String baseUrl = "https://mobizoe.com/wp-content/uploads/";
 
+     // Sample Religious Days Json
+    // https://mobizoe.com/wp-content/uploads/2025/12/religiousdays.json
+
      public static String getBaseUrl() {
           return baseUrl+getYear()+"/"+getMonth()+"/";
      }
@@ -12,6 +15,8 @@ public class Host {
      public static String getRetryBaseUrl() {
           return baseUrl+getYear()+"/"+getRetryMonth()+"/";
      }
+
+
 
      static String getMonth(){
           LocalDate today = LocalDate.now();
@@ -37,5 +42,9 @@ public class Host {
      }
 
      public static final String getSermons = "sermon.json?t="+System.currentTimeMillis();
+
+    public static String getReligious() {
+        return "2025/12/religiousdays.json?t=" + System.currentTimeMillis();
+    }
      // Cache'lemeyi iptal etmek için bu gerekli.
 }

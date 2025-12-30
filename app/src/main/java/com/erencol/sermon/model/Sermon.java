@@ -1,4 +1,4 @@
-package com.erencol.sermon.Model;
+package com.erencol.sermon.model;
 
 import com.google.gson.annotations.SerializedName;
 

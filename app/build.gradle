@@ -43,7 +43,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     // AndroidX Core ve AppCompat
-    implementation 'androidx.core:core-ktx:1.16.0'
+    implementation 'androidx.core:core-ktx:1.17.0'
     implementation 'androidx.appcompat:appcompat:1.7.1'
 
     // Material Components (Design yerine bu kullanılır)
@@ -51,7 +51,7 @@ dependencies {
 
 
     // Lifecycle (ViewModel, LiveData, vb.)
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0' // Deprecated, mümkünse ViewModel ayrı kullan
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.9.2'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.9.2'
 

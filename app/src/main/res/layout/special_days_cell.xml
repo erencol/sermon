@@ -27,7 +27,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/sermon_cell_title"
-                    android:layout_toEndOf="@+id/sermon_cell_image"
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="8dp"
@@ -36,6 +35,7 @@
                     android:maxLines="2"
                     android:text="@{specialDaysCellViewModel.dayName}"
                     android:textColor="@color/title_text_color"
+                    tools:text="Ramazan Bayramı"
                    />
     
                 <TextView
@@ -50,7 +50,8 @@
                     android:layout_below="@id/sermon_cell_title"
                     android:text="@{specialDaysCellViewModel.dayDate}"
                     android:textColor="@color/short_text_color"
-                    android:textSize="@dimen/short_text_size" />
+                    android:textSize="@dimen/short_text_size"
+                    tools:text="5 Ocak 2025"/>
 
 
     

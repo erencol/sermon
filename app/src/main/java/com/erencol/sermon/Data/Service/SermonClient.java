@@ -6,9 +6,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SermonClient {
-    private static SermonClient instance;
-
-    public static ISermons create() {
+    public static ISermons createSermonClient() {
         OkHttpClient client = new OkHttpClient.Builder()
                 .cache(null)
                 .addInterceptor(new RetryOn404Interceptor(Host.getRetryBaseUrl()))
@@ -22,11 +20,17 @@ public class SermonClient {
         return retrofit.create(ISermons.class);
     }
 
-    public static SermonClient getInstance(){
-        if (instance == null)
-            instance = new SermonClient();
-        return instance;
-    }
+    public static IReligious createReligiousClient() {
+        OkHttpClient client = new OkHttpClient.Builder()
+                .cache(null)
+                .build();
 
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(Host.baseUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(client)
+                .build();
+        return retrofit.create(IReligious.class);
+    }
 
 }

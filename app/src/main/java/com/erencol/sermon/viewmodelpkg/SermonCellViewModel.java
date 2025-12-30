@@ -9,10 +9,10 @@ import androidx.databinding.BindingAdapter;
 
 import com.bumptech.glide.GenericTransitionOptions;
 import com.bumptech.glide.Glide;
-import com.erencol.sermon.Model.Sermon;
+import com.erencol.sermon.model.Sermon;
 import com.erencol.sermon.R;
 import com.erencol.sermon.SermonApplication;
-import com.erencol.sermon.View.Activities.ReadingActivity;
+import com.erencol.sermon.view.activities.ReadingActivity;
 
 public class SermonCellViewModel extends BaseObservable {
     private Sermon sermon;

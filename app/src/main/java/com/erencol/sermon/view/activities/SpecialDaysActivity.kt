@@ -1,4 +1,4 @@
-package com.erencol.sermon.View.Activities
+package com.erencol.sermon.view.activities
 
 import android.app.Activity
 import android.content.Intent
@@ -10,51 +10,49 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.erencol.sermon.Model.SpecialDay
-import com.erencol.sermon.R;
-import com.erencol.sermon.View.Adapters.SpecialDayAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.erencol.sermon.R
 import com.erencol.sermon.databinding.ActivitySpecialDaysBinding
+import com.erencol.sermon.view.adapters.SpecialDayAdapter
 import com.erencol.sermon.viewmodelpkg.SpecialDaysViewModel
 import com.google.android.play.core.review.ReviewInfo
 import com.google.android.play.core.review.ReviewManager
 import com.google.android.play.core.review.ReviewManagerFactory
+import java.util.Observable
 
-class SpecialDays : AppCompatActivity() {
+class SpecialDaysActivity : AppCompatActivity() {
     private val ACTIVITY_CALLBACK = 1
     private var reviewInfo: ReviewInfo? = null
     private lateinit var reviewManager: ReviewManager
     lateinit var specialDaysBinding: ActivitySpecialDaysBinding
-    val specialDaysList = listOf(
-        SpecialDay("Üç Ayların Başlangıcı", "1 Ocak 2025"),
-        SpecialDay("Regaib Kandili", "2 Ocak 2025"),
-        SpecialDay("Miraç Kandili", "26 Ocak 2025"),
-        SpecialDay("Berat Kandili", "13 Şubat 2025"),
-        SpecialDay("Ramazan Başlangıcı", "1 Mart 2025"),
-        SpecialDay("Kadir Gecesi", "26 Mart 2025"),
-        SpecialDay("Arefe", "29 Mart 2025"),
-        SpecialDay("Ramazan Bayramı 1. Gün", "30 Mart 2025"),
-        SpecialDay("Ramazan Bayramı 2. Gün", "31 Mart 2025"),
-        SpecialDay("Ramazan Bayramı 3. Gün", "1 Nisan 2025"),
-        SpecialDay("Arefe", "5 Haziran 2025"),
-        SpecialDay("Kurban Bayramı 1. Gün", "6 Haziran 2025"),
-        SpecialDay("Kurban Bayramı 2. Gün", "7 Haziran 2025"),
-        SpecialDay("Kurban Bayramı 3. Gün", "8 Haziran 2025"),
-        SpecialDay("Kurban Bayramı 4. Gün", "9 Haziran 2025"),
-        SpecialDay("Hicri Yılbaşı", "26 Haziran 2025"),
-        SpecialDay("Aşure Günü", "5 Temmuz 2025"),
-        SpecialDay("Mevlid Kandili", "3 Eylül 2025"),
-        SpecialDay("Üç Ayların Başlangıcı", "21 Aralık 2025"),
-        SpecialDay("Regaib Kandili", "25 Aralık 2025"),
-    )
+    val adapter = SpecialDayAdapter()
+
     var specialDaysViewModel: SpecialDaysViewModel = SpecialDaysViewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         specialDaysBinding = DataBindingUtil.setContentView(this,R.layout.activity_special_days)
         specialDaysBinding.lifecycleOwner = this
         specialDaysBinding.specialDaysViewModel = specialDaysViewModel
+        setListReligiousDays(specialDaysBinding.specialdaysrecyclerview)
         setToolBar()
-        setAdapter()
+        setupObserver()
         reviewGooglePlayReviewInterface()
+    }
+
+    private fun setListReligiousDays(listReligiousDays: RecyclerView) {
+        specialDaysBinding.specialdaysrecyclerview.adapter = adapter
+        specialDaysBinding.specialdaysrecyclerview.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        listReligiousDays.setAdapter(adapter)
+        listReligiousDays.setLayoutManager(LinearLayoutManager(this))
+        specialDaysViewModel.getReligiousDays()
+    }
+
+    fun setupObserver() {
+       specialDaysViewModel.religiousDaysLivedata.observe(this, { religiousDays ->
+           adapter.setSpecialDays(religiousDays.religiousDays)
+       })
     }
 
     fun reviewGooglePlayReviewInterface() {
@@ -82,24 +80,16 @@ class SpecialDays : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    fun setAdapter(){
-        val adapter= SpecialDayAdapter()
-        specialDaysBinding.specialdaysrecyclerview.adapter = adapter
-        specialDaysBinding.specialdaysrecyclerview.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        adapter.setSpecialDays(specialDaysList)
-
-    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == ACTIVITY_CALLBACK && resultCode == Activity.RESULT_OK) {
             Handler().postDelayed({
                 reviewInfo?.let {
-                    val flow = reviewManager.launchReviewFlow(this@SpecialDays, it)
+                    val flow = reviewManager.launchReviewFlow(this@SpecialDaysActivity, it)
                     flow.addOnSuccessListener {
                         //Showing toast is only for testing purpose, this shouldn't be implemented
                         //in production app.
                         Toast.makeText(
-                                this@SpecialDays,
+                                this@SpecialDaysActivity,
                                 "Thanks for the feedback!",
                                 Toast.LENGTH_LONG
                         ).show()
@@ -107,12 +97,12 @@ class SpecialDays : AppCompatActivity() {
                     flow.addOnFailureListener {
                         //Showing toast is only for testing purpose, this shouldn't be implemented
                         //in production app.
-                        Toast.makeText(this@SpecialDays, "${it.message}", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@SpecialDaysActivity, "${it.message}", Toast.LENGTH_LONG).show()
                     }
                     flow.addOnCompleteListener {
                         //Showing toast is only for testing purpose, this shouldn't be implemented
                         //in production app.
-                        Toast.makeText(this@SpecialDays, "Completed!", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@SpecialDaysActivity, "Completed!", Toast.LENGTH_LONG).show()
                     }
                 }
             }, 3000)

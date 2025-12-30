@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.view.View;
 
 import androidx.lifecycle.ViewModel;
-import com.erencol.sermon.Model.Sermon;
+import com.erencol.sermon.model.Sermon;
 import com.erencol.sermon.R;
 
 public class ReadingViewModel extends ViewModel {

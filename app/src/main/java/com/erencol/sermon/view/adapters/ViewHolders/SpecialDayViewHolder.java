@@ -1,11 +1,9 @@
-package com.erencol.sermon.View.Adapters.ViewHolders;
+package com.erencol.sermon.view.adapters.ViewHolders;
 
-
-import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.erencol.sermon.Model.SpecialDay;
+import com.erencol.sermon.model.SpecialDay;
 import com.erencol.sermon.databinding.SpecialDaysCellBinding;
 import com.erencol.sermon.viewmodelpkg.SpecialDaysCellViewModel;
 

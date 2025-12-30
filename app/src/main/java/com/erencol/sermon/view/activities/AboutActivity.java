@@ -1,4 +1,4 @@
-package com.erencol.sermon.View.Activities;
+package com.erencol.sermon.view.activities;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;

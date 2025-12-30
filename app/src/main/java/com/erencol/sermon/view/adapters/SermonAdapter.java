@@ -1,4 +1,4 @@
-package com.erencol.sermon.View.Adapters;
+package com.erencol.sermon.view.adapters;
 
 
 import android.view.LayoutInflater;
@@ -9,8 +9,8 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.erencol.sermon.R;
-import com.erencol.sermon.Model.Sermon;
-import com.erencol.sermon.View.Adapters.ViewHolders.SermonViewHolder;
+import com.erencol.sermon.model.Sermon;
+import com.erencol.sermon.view.adapters.ViewHolders.SermonViewHolder;
 import com.erencol.sermon.databinding.SermonCellBinding;
 import java.util.Collections;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.erencol.sermon.View.Activities;
+package com.erencol.sermon.view.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import com.erencol.sermon.Data.Service.manager.SharedPreferencesManager;
-import com.erencol.sermon.Model.Sermon;
+import com.erencol.sermon.model.Sermon;
 import com.erencol.sermon.R;
 import com.erencol.sermon.databinding.ActivityReadingBinding;
 import com.erencol.sermon.viewmodelpkg.ReadingViewModel;
@@ -69,7 +69,7 @@ public class ReadingActivity extends AppCompatActivity {
     }
 
     public void goToSpecialDaysActivity(){
-        Intent i = new Intent(ReadingActivity.this,SpecialDays.class);
+        Intent i = new Intent(ReadingActivity.this, SpecialDaysActivity.class);
         startActivity(i);
     }
 

@@ -1,18 +1,15 @@
-package com.erencol.sermon.View.Activities;
+package com.erencol.sermon.view.activities;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import androidx.appcompat.app.AlertDialog;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.erencol.sermon.View.Adapters.SermonAdapter;
+import com.erencol.sermon.view.adapters.SermonAdapter;
 import com.erencol.sermon.databinding.ActivityMainBinding;
 import com.erencol.sermon.viewmodelpkg.MainViewModel;
 import java.util.Observable;
@@ -34,9 +31,8 @@ public class MainActivity extends AppCompatActivity implements Observer {
         binding.setMainViewModel(mainViewModel);
         binding.setLifecycleOwner(this);
         setSupportActionBar(binding.toolbar);
-        setupListPeopleView(binding.sermonsRecyclerview);
+        setListSermonListview(binding.sermonsRecyclerview);
         setupObserver(mainViewModel);
-
     }
 
     @Override
@@ -48,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
     public void setupObserver(Observable observable) {
         observable.addObserver(this);
     }
-    private void setupListPeopleView(RecyclerView listPeople) {
+    private void setListSermonListview(RecyclerView listPeople) {
         SermonAdapter adapter = new SermonAdapter();
         listPeople.setAdapter(adapter);
         listPeople.setLayoutManager(new LinearLayoutManager(this));
@@ -77,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
     }
 
     public void goToSpecialDaysActivity(){
-        Intent i = new Intent(MainActivity.this,SpecialDays.class);
+        Intent i = new Intent(MainActivity.this, SpecialDaysActivity.class);
         startActivity(i);
     }
 

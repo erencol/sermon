@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.erencol.sermon.View.Activities.FirstFragment"
+        android:name="com.erencol.sermon.view.activities.FirstFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first">
 
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.erencol.sermon.View.Activities.SecondFragment"
+        android:name="com.erencol.sermon.view.activities.SecondFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
 
