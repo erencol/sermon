@@ -36,7 +36,7 @@ Aenean in arcu laoreet, gravida orci et, faucibus velit. Etiam finibus viverra t
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="other_apps">Geliştiricinin Diğer Uygulamaları</string>
     <string name="app1_name">Çizim Uygulaması</string>
-    <string name="app2_name">Oyun Kartları</string>
+    <string name="app2_name">Sesli Notlar</string>
     <string name="donate">Geliştiriciye katkıda bulunun.</string>
     <string name="donate_explain">Uygulamanın reklamsız bir şekilde devam edebilmesi için geliştiriciye destek olun.</string>
     <string name="iban">"Finansbank: TR32 0011 1000 0000 0061 3567 00 (Kopyala)"</string>

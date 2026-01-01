@@ -40,6 +40,10 @@ public class AboutActivity extends AppCompatActivity {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.mobizoe.drawing")));
     }
 
+    public void voiceNotesClick(View view) {
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.mobizoe.senote")));
+    }
+
     public void copy(View view){
         ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText("Hutbeler Iban", getResources().getString(R.string.iban_copy_text));

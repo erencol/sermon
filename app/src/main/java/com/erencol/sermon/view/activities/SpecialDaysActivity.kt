@@ -1,10 +1,15 @@
 package com.erencol.sermon.view.activities
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.view.LayoutInflater
 import android.view.MenuItem
+import android.view.View
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -13,12 +18,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.erencol.sermon.R
 import com.erencol.sermon.databinding.ActivitySpecialDaysBinding
+import com.erencol.sermon.model.SpecialDay
 import com.erencol.sermon.view.adapters.SpecialDayAdapter
 import com.erencol.sermon.viewmodelpkg.SpecialDaysViewModel
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.play.core.review.ReviewInfo
 import com.google.android.play.core.review.ReviewManager
 import com.google.android.play.core.review.ReviewManagerFactory
-import java.util.Observable
+
 
 class SpecialDaysActivity : AppCompatActivity() {
     private val ACTIVITY_CALLBACK = 1
@@ -31,7 +38,7 @@ class SpecialDaysActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        specialDaysBinding = DataBindingUtil.setContentView(this,R.layout.activity_special_days)
+        specialDaysBinding = DataBindingUtil.setContentView(this, R.layout.activity_special_days)
         specialDaysBinding.lifecycleOwner = this
         specialDaysBinding.specialDaysViewModel = specialDaysViewModel
         setListReligiousDays(specialDaysBinding.specialdaysrecyclerview)
@@ -52,11 +59,36 @@ class SpecialDaysActivity : AppCompatActivity() {
     fun setupObserver() {
        specialDaysViewModel.religiousDaysLivedata.observe(this, { religiousDays ->
            adapter.setSpecialDays(religiousDays.religiousDays)
+           adapter.setOnItemClickListener { specialDay, position ->
+                createBottomSheetDialog(specialDay)
+
+           }
        })
     }
 
-    fun reviewGooglePlayReviewInterface() {
+    @SuppressLint("SetTextI18n")
+    fun createBottomSheetDialog(specialDay: SpecialDay) {
 
+        val bottomSheetDialog = BottomSheetDialog(this);
+        val bottomSheetView: View = LayoutInflater.from(this)
+            .inflate(R.layout.special_day_detail_bottom_sheet, null)
+
+        val tvTitle = bottomSheetView.findViewById<TextView>(R.id.tvTitle)
+        val tvDescription = bottomSheetView.findViewById<TextView>(R.id.tvDescription)
+        val tvDate = bottomSheetView.findViewById<TextView>(R.id.tvDate)
+        val btnClose = bottomSheetView.findViewById<Button>(R.id.btnClose)
+
+        tvTitle.text = specialDay.name
+        tvDescription.text = specialDay.description
+        tvDate.text = specialDay.miladi.day.toString() + "." + specialDay.miladi.month + " " + specialDay.miladi.weekday
+
+        btnClose.setOnClickListener { _: View? -> bottomSheetDialog.dismiss() }
+
+        bottomSheetDialog.setContentView(bottomSheetView)
+        bottomSheetDialog.show()
+    }
+
+    fun reviewGooglePlayReviewInterface() {
         //Create the ReviewManager instance
         reviewManager = ReviewManagerFactory.create(this)
 
