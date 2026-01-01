@@ -53,5 +53,6 @@ Aenean in arcu laoreet, gravida orci et, faucibus velit. Etiam finibus viverra t
     <string name="compass">Kıble Pusulası</string>
     <string name="qibla">Kıble Yönü</string>
     <string name="sermon_image">sermon_image</string>
+    <string name="close">Kapat</string>
 
 </resources>

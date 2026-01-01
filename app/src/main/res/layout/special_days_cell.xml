@@ -19,8 +19,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
->
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:layout_width="80dp"
@@ -46,8 +45,7 @@
                 android:text="@{specialDaysCellViewModel.dayName}"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:textColor="@color/title_text_color"
-                tools:text="Ramazan Bayramı"
-                />
+                tools:text="Ramazan Bayramı" />
     
             <TextView
                 android:id="@+id/religious_cell_miladi"
