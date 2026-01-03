@@ -12,10 +12,7 @@ import com.erencol.sermon.viewmodelpkg.SermonCellViewModel;
 
 public class SermonViewHolder extends RecyclerView.ViewHolder {
     SermonCellBinding sermonCellBinding;
-
-    public TextView sermonTitle,sermonShortText,sermonDate;
     public View view;
-    public ImageView sermonImage;
 
     public SermonViewHolder(SermonCellBinding sermonCellBinding) {
         super(sermonCellBinding.itemSermon);
@@ -23,20 +20,21 @@ public class SermonViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindSermon(Sermon sermon) {
+        bindSermon(sermon, false, 0);
+    }
+
+    public void bindSermon(Sermon sermon, boolean isLocked, int position) {
         if (sermonCellBinding.getSermonCellViewModel() == null) {
             sermonCellBinding.setSermonCellViewModel(
-                    new SermonCellViewModel(sermon));
-            if(sermon.isNew)
-                sermonCellBinding.newAlert.setVisibility(View.VISIBLE);
-            else
-                sermonCellBinding.newAlert.setVisibility(View.GONE);
+                    new SermonCellViewModel(sermon, isLocked, position));
         } else {
-            sermonCellBinding.getSermonCellViewModel().setSermon(sermon);
-            if(sermon.isNew)
-                sermonCellBinding.newAlert.setVisibility(View.VISIBLE);
-            else
-                sermonCellBinding.newAlert.setVisibility(View.GONE);
+            sermonCellBinding.getSermonCellViewModel().setSermon(sermon, isLocked, position);
         }
+        if(sermon.isNew)
+            sermonCellBinding.newAlert.setVisibility(View.VISIBLE);
+        else
+            sermonCellBinding.newAlert.setVisibility(View.GONE);
+
     }
 
 }

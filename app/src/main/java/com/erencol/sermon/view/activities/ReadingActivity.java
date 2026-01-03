@@ -1,6 +1,9 @@
 package com.erencol.sermon.view.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -8,7 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
-import com.erencol.sermon.Data.Service.manager.SharedPreferencesManager;
+import com.erencol.sermon.Data.service.manager.SharedPreferencesManager;
+import com.erencol.sermon.Data.service.manager.PremiumManager;
 import com.erencol.sermon.model.Sermon;
 import com.erencol.sermon.R;
 import com.erencol.sermon.databinding.ActivityReadingBinding;
@@ -19,16 +23,59 @@ import java.util.Objects;
 public class ReadingActivity extends AppCompatActivity {
     Sermon sermon;
     SharedPreferencesManager sharedPreferencesManager;
+    PremiumManager premiumManager;
     ActivityReadingBinding activityReadingBinding;
     int fontSize = 8;
+    private static final int FREE_SERMON_LIMIT = 5;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityReadingBinding = DataBindingUtil.setContentView(this, R.layout.activity_reading);
         sharedPreferencesManager = new SharedPreferencesManager(getApplicationContext());
-        setFontSize();
+        premiumManager = PremiumManager.getInstance(getApplicationContext());
         getExtrasFromIntent();
+        
+        // Premium kontrolü
+        int sermonPosition = getIntent().getIntExtra("sermon_position", -1);
+        if (sermonPosition >= FREE_SERMON_LIMIT && !premiumManager.isPremium()) {
+            showPremiumRequiredDialog();
+            return;
+        }
+        
+        setFontSize();
         setToolbar(sermon.title);
+    }
+    
+    private void showPremiumRequiredDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("Premium İçerik")
+                .setMessage("Bu hutbe premium kullanıcılar için. Premium satın almak ister misiniz?")
+                .setPositiveButton("Satın Al", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        openPremiumPurchase();
+                        finish();
+                    }
+                })
+                .setNegativeButton("İptal", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .setCancelable(false)
+                .show();
+    }
+    
+    private void openPremiumPurchase() {
+        try {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=" + getPackageName()));
+            startActivity(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

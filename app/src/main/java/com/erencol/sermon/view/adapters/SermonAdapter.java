@@ -17,9 +17,17 @@ import java.util.List;
 
 public class SermonAdapter extends RecyclerView.Adapter<SermonViewHolder> {
     private List<Sermon> sermonList;
+    private boolean isPremium;
+    private static final int FREE_SERMON_LIMIT = 5;
 
     public SermonAdapter() {
         this.sermonList = Collections.emptyList();
+        this.isPremium = false;
+    }
+
+    public void setPremium(boolean isPremium) {
+        this.isPremium = isPremium;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -32,7 +40,10 @@ public class SermonAdapter extends RecyclerView.Adapter<SermonViewHolder> {
 
     @Override
     public void onBindViewHolder(final SermonViewHolder holder, final int position) {
-        holder.bindSermon(sermonList.get(position));
+        Sermon sermon = sermonList.get(position);
+        boolean isLocked = !isPremium && position >= FREE_SERMON_LIMIT;
+        holder.bindSermon(sermon, isLocked, position);
+
     }
 
     @Override
@@ -46,8 +57,5 @@ public class SermonAdapter extends RecyclerView.Adapter<SermonViewHolder> {
         this.sermonList = sermonList;
         notifyDataSetChanged();
     }
-
-
-
 
 }

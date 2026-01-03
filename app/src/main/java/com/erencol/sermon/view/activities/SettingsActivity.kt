@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
-import com.erencol.sermon.Data.Service.manager.SharedPreferencesManager
+import com.erencol.sermon.Data.service.manager.SharedPreferencesManager
 import com.erencol.sermon.R
 import com.erencol.sermon.databinding.ActivitySettingsBinding
 

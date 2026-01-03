@@ -1,12 +1,10 @@
 package com.erencol.sermon.viewmodelpkg;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.erencol.sermon.Data.Service.Host;
-import com.erencol.sermon.Data.Service.IReligious;
-import com.erencol.sermon.Data.Service.ISermons;
-import com.erencol.sermon.Data.Service.SermonClient;
+import com.erencol.sermon.Data.service.Host;
+import com.erencol.sermon.Data.service.ISermons;
+import com.erencol.sermon.Data.service.SermonClient;
 import com.erencol.sermon.model.Sermon;
 import java.util.List;
 import java.util.Observable;
