@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
-import com.erencol.sermon.Data.Service.manager.SharedPreferencesManager;
+import com.erencol.sermon.data.manager.SharedPreferencesManager;
 import com.erencol.sermon.model.Sermon;
 import com.erencol.sermon.R;
 import com.erencol.sermon.databinding.ActivityReadingBinding;
@@ -21,6 +21,7 @@ public class ReadingActivity extends AppCompatActivity {
     SharedPreferencesManager sharedPreferencesManager;
     ActivityReadingBinding activityReadingBinding;
     int fontSize = 8;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +34,7 @@ public class ReadingActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main,menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -43,9 +44,9 @@ public class ReadingActivity extends AppCompatActivity {
         setFontSize();
     }
 
-    public void setFontSize(){
+    public void setFontSize() {
         fontSize = sharedPreferencesManager.getFontSize(sharedPreferencesManager.getDEFAULT_FONT_SIZE());
-        activityReadingBinding.text.setTextSize(Float.parseFloat(String.valueOf(fontSize*6)));
+        activityReadingBinding.text.setTextSize(Float.parseFloat(String.valueOf(fontSize * 6)));
     }
 
     @Override
@@ -68,17 +69,17 @@ public class ReadingActivity extends AppCompatActivity {
         }
     }
 
-    public void goToSpecialDaysActivity(){
+    public void goToSpecialDaysActivity() {
         Intent i = new Intent(ReadingActivity.this, SpecialDaysActivity.class);
         startActivity(i);
     }
 
-    public void goToSettingsActivity(){
-        Intent i = new Intent(ReadingActivity.this,SettingsActivity.class);
+    public void goToSettingsActivity() {
+        Intent i = new Intent(ReadingActivity.this, SettingsActivity.class);
         startActivity(i);
     }
 
-    public void showAboutActivity(){
+    public void showAboutActivity() {
         Intent i = new Intent(ReadingActivity.this, AboutActivity.class);
         startActivity(i);
     }
@@ -93,7 +94,7 @@ public class ReadingActivity extends AppCompatActivity {
         collapsingToolbar.setCollapsedTitleTextColor(getResources().getColor(R.color.white));
     }
 
-    public void getExtrasFromIntent(){
+    public void getExtrasFromIntent() {
         sermon = new Sermon();
         sermon = (Sermon) Objects.requireNonNull(getIntent().getExtras()).getSerializable("sermon");
         ReadingViewModel readingViewModel = new ReadingViewModel(sermon);
