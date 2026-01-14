@@ -1,7 +1,6 @@
-package com.erencol.sermon.view.activities
+package com.erencol.sermon.view.specialdays
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -19,13 +18,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.erencol.sermon.R
 import com.erencol.sermon.databinding.ActivitySpecialDaysBinding
 import com.erencol.sermon.model.SpecialDay
-import com.erencol.sermon.view.adapters.SpecialDayAdapter
-import com.erencol.sermon.viewmodelpkg.SpecialDaysViewModel
+import com.erencol.sermon.view.specialdays.SpecialDayAdapter
+import com.erencol.sermon.view.specialdays.SpecialDaysViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.play.core.review.ReviewInfo
 import com.google.android.play.core.review.ReviewManager
 import com.google.android.play.core.review.ReviewManagerFactory
-
 
 class SpecialDaysActivity : AppCompatActivity() {
     private val ACTIVITY_CALLBACK = 1
@@ -113,7 +111,7 @@ class SpecialDaysActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == ACTIVITY_CALLBACK && resultCode == Activity.RESULT_OK) {
+        if (requestCode == ACTIVITY_CALLBACK && resultCode == RESULT_OK) {
             Handler().postDelayed({
                 reviewInfo?.let {
                     val flow = reviewManager.launchReviewFlow(this@SpecialDaysActivity, it)

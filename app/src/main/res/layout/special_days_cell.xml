@@ -5,7 +5,7 @@
     <data>
         <variable
             name="specialDaysCellViewModel"
-            type="com.erencol.sermon.viewmodelpkg.SpecialDaysCellViewModel" />
+            type="com.erencol.sermon.view.specialdays.SpecialDaysCellViewModel" />
     </data>
         
     <androidx.cardview.widget.CardView

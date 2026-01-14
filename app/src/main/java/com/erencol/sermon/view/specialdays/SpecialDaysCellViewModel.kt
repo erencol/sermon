@@ -1,4 +1,4 @@
-package com.erencol.sermon.viewmodelpkg
+package com.erencol.sermon.view.specialdays
 
 import androidx.databinding.BaseObservable
 import com.erencol.sermon.model.SpecialDay

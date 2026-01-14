@@ -1,4 +1,4 @@
-package com.erencol.sermon.view.activities
+package com.erencol.sermon.view.compass
 
 import android.Manifest
 import android.content.pm.PackageManager

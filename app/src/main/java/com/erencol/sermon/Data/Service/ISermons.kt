@@ -1,15 +1,11 @@
-package com.erencol.sermon.Data.Service;
+package com.erencol.sermon.data.service
 
-import com.erencol.sermon.model.ReligiousDays;
-import com.erencol.sermon.model.Sermon;
+import com.erencol.sermon.model.Sermon
+import io.reactivex.Observable
+import retrofit2.http.GET
+import retrofit2.http.Url
 
-import java.util.List;
-
-import io.reactivex.Observable;
-
-import retrofit2.http.GET;
-import retrofit2.http.Url;
-
-public interface ISermons  {
-    @GET Observable<List<Sermon>> getSermons(@Url String url);
+interface ISermons {
+    @GET
+    fun getSermons(@Url url: String): Observable<List<Sermon>>
 }
