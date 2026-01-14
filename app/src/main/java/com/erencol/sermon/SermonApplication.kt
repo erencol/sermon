@@ -1,18 +1,8 @@
-package com.erencol.sermon;
+package com.erencol.sermon
 
-import android.app.Application;
-import android.content.Context;
+import android.app.Application
 
-public class SermonApplication extends Application {
+class SermonApplication : Application() {
 
-    private static Context context;
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        SermonApplication.context = getApplicationContext();
-    }
 
-    public Context getAppContext(){
-        return SermonApplication.context;
-    }
 }

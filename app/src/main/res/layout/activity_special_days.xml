@@ -2,11 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".view.activities.SpecialDaysActivity">
+    tools:context=".view.specialdays.SpecialDaysActivity">
     <data>
         <variable
         name="specialDaysViewModel"
-        type="com.erencol.sermon.viewmodelpkg.SpecialDaysViewModel" />
+        type="com.erencol.sermon.view.specialdays.SpecialDaysViewModel" />
     </data>
     <RelativeLayout
         android:layout_width="match_parent"

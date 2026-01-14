@@ -5,7 +5,7 @@
 
         <variable
             name="sermonDetailViewModel"
-            type="com.erencol.sermon.viewmodelpkg.ReadingViewModel" />
+            type="com.erencol.sermon.view.reading.ReadingViewModel" />
     </data>
 
 
@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        tools:context=".view.activities.ReadingActivity">
+        tools:context=".view.reading.ReadingActivity">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
@@ -54,7 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-            tools:context=".view.activities.ReadingActivity"
+            tools:context=".view.reading.ReadingActivity"
             tools:showIn="@layout/activity_reading">
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"

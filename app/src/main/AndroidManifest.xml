@@ -15,27 +15,27 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".view.activities.CompassActivity"
+            android:name=".view.compass.CompassActivity"
             android:exported="false" />
         <activity
-            android:name=".view.activities.SettingsActivity"
+            android:name=".view.settings.SettingsActivity"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.activities.SpecialDaysActivity"
+            android:name=".view.specialdays.SpecialDaysActivity"
             android:exported="true" />
         <activity
-            android:name=".view.activities.AboutActivity"
+            android:name=".view.about.AboutActivity"
             android:exported="true"
             android:label="@string/title_activity_about"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.activities.ReadingActivity"
+            android:name=".view.reading.ReadingActivity"
             android:exported="true"
             android:label="@string/title_activity_reading"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.activities.MainActivity"
+            android:name=".view.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
