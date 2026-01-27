@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.erencol.sermon.R
 import com.erencol.sermon.databinding.SpecialDaysCellBinding
 import com.erencol.sermon.model.SpecialDay
-import com.erencol.sermon.view.specialdays.SpecialDayViewHolder
 
 class SpecialDayAdapter : RecyclerView.Adapter<SpecialDayViewHolder>() {
     private var specialDays: List<SpecialDay> = emptyList()

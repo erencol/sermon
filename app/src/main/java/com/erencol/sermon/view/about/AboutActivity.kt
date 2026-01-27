@@ -1,12 +1,7 @@
 package com.erencol.sermon.view.about
 
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
@@ -29,10 +24,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.erencol.sermon.R
+import androidx.core.net.toUri
 
 class AboutActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
@@ -120,38 +115,6 @@ fun AboutScreen(modifier: Modifier = Modifier) {
 
         Spacer(modifier = Modifier.height(32.dp))
 
-        // Donate Section
-        Column(modifier = Modifier.padding(start = 34.dp)) {
-            Text(
-                text = stringResource(id = R.string.donate),
-                fontSize = 18.sp
-            )
-            Text(
-                text = stringResource(id = R.string.donate_explain),
-                modifier = Modifier.padding(top = 8.dp, end = 34.dp)
-            )
-            
-            // IBAN
-            val ibanText = stringResource(id = R.string.iban)
-            val ibanCopyText = stringResource(id = R.string.iban_copy_text)
-            Text(
-                text = ibanText,
-                modifier = Modifier
-                    .padding(top = 34.dp, end = 34.dp)
-                    .fillMaxWidth() // To allow center gravity if needed, but existing was weird. "gravity center" in Linear? No, TextView had wrap_content and layout_marginRight=34dp. But let's check gravity. 
-                    // XML: android:layout_width="wrap_content", android:gravity="center". Gravity center in wrap_content does nothing unless single line?
-                    // But it has a click listener.
-                    .clickable {
-                        val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                        val clip = ClipData.newPlainText("Hutbeler Iban", ibanCopyText)
-                        clipboard.setPrimaryClip(clip)
-                        Toast.makeText(context, "Kopyalandı.", Toast.LENGTH_SHORT).show()
-                    },
-                textAlign = TextAlign.Center // Just in case
-            )
-        }
-        
-        Spacer(modifier = Modifier.height(34.dp)) // Extra padding at bottom
     }
 }
 
@@ -172,7 +135,7 @@ fun AppLinkButton(
             .clip(RoundedCornerShape(12.dp))
             .background(Color(0xFFAAAAAA)) // gray_bg
             .clickable {
-                context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+                context.startActivity(Intent(Intent.ACTION_VIEW, url.toUri()))
             }
             .padding(12.dp),
         verticalAlignment = Alignment.CenterVertically

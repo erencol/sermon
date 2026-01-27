@@ -10,8 +10,8 @@ android {
         applicationId "com.erencol.sermon"
         minSdkVersion 26
         targetSdk 35
-        versionCode 14
-        versionName "1.0.9"
+        versionCode 17
+        versionName "1.0.11"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -104,4 +104,7 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.2.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
+
+    // Google Play Billing
+    implementation 'com.android.billingclient:billing-ktx:7.0.0'
 }

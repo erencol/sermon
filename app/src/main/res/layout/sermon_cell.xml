@@ -60,10 +60,25 @@
                 android:textColor="@color/green"/>
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/premium_badge"
+                android:text="@string/premium"
+                android:visibility="@{sermonCellViewModel.premiumBadgeVisibility}"
+                android:textAlignment="textEnd"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/new_alert"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="10dp"
+                android:textColor="#FFD700"
+                android:textStyle="bold"/>
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/sermon_cell_title"
                 android:layout_toEndOf="@+id/sermon_cell_image_bg"
+                android:layout_toStartOf="@id/premium_badge"
                 android:layout_below="@id/new_alert"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="8dp"

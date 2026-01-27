@@ -29,13 +29,28 @@ class SermonCellViewModel(var sermon: Sermon) : BaseObservable() {
     val isNew: Int
         get() = if (sermon.isNew == true) View.VISIBLE else View.GONE
 
+    var isLocked: Boolean = false
+        set(value) {
+            field = value
+            notifyChange()
+        }
+
+    val premiumBadgeVisibility: Int
+        get() = if (isLocked) View.VISIBLE else View.GONE
+
+    var onLockedClick: (() -> Unit)? = null
+
     fun onItemClick(view: View) {
-        val bundle = Bundle()
-        bundle.putSerializable("sermon", sermon)
-        val goToSermonDetail = Intent(view.context, ReadingActivity::class.java)
-        goToSermonDetail.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        goToSermonDetail.putExtras(bundle)
-        view.context.startActivity(goToSermonDetail)
+        if (isLocked) {
+             onLockedClick?.invoke()
+        } else {
+            val bundle = Bundle()
+            bundle.putSerializable("sermon", sermon)
+            val goToSermonDetail = Intent(view.context, ReadingActivity::class.java)
+            goToSermonDetail.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            goToSermonDetail.putExtras(bundle)
+            view.context.startActivity(goToSermonDetail)
+        }
     }
 
     fun setSermonData(sermon: Sermon) {

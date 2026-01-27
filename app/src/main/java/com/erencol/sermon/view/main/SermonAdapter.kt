@@ -7,10 +7,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.erencol.sermon.R
 import com.erencol.sermon.databinding.SermonCellBinding
 import com.erencol.sermon.model.Sermon
-import com.erencol.sermon.view.main.SermonViewHolder
 
 class SermonAdapter : RecyclerView.Adapter<SermonViewHolder>() {
     private var sermonList: List<Sermon> = emptyList()
+    var isPremium: Boolean = false
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
+    var onPremiumContentClick: (() -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SermonViewHolder {
         val sermonCellBinding = DataBindingUtil.inflate<SermonCellBinding>(
@@ -21,7 +26,8 @@ class SermonAdapter : RecyclerView.Adapter<SermonViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: SermonViewHolder, position: Int) {
-        holder.bindSermon(sermonList[position])
+        val isLocked = !isPremium && position >= 5
+        holder.bindSermon(sermonList[position], isLocked, onPremiumContentClick)
     }
 
     override fun getItemCount(): Int {

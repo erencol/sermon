@@ -18,8 +18,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.erencol.sermon.R
 import com.erencol.sermon.databinding.ActivitySpecialDaysBinding
 import com.erencol.sermon.model.SpecialDay
-import com.erencol.sermon.view.specialdays.SpecialDayAdapter
-import com.erencol.sermon.view.specialdays.SpecialDaysViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.play.core.review.ReviewInfo
 import com.google.android.play.core.review.ReviewManager
@@ -120,7 +118,7 @@ class SpecialDaysActivity : AppCompatActivity() {
                         //in production app.
                         Toast.makeText(
                                 this@SpecialDaysActivity,
-                                "Thanks for the feedback!",
+                                "Geri bildiriminiz için teşekkür ederiz!",
                                 Toast.LENGTH_LONG
                         ).show()
                     }
@@ -132,7 +130,7 @@ class SpecialDaysActivity : AppCompatActivity() {
                     flow.addOnCompleteListener {
                         //Showing toast is only for testing purpose, this shouldn't be implemented
                         //in production app.
-                        Toast.makeText(this@SpecialDaysActivity, "Completed!", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@SpecialDaysActivity, "Tamamlandı!", Toast.LENGTH_LONG).show()
                     }
                 }
             }, 3000)

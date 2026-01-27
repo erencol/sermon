@@ -54,5 +54,10 @@ Aenean in arcu laoreet, gravida orci et, faucibus velit. Etiam finibus viverra t
     <string name="qibla">Kıble Yönü</string>
     <string name="sermon_image">sermon_image</string>
     <string name="close">Kapat</string>
+    <string name="analyze">İncele</string>
+    <string name="later">Daha Sonra</string>
+    <string name="premium_popup_title">Premium Abonelik</string>
+    <string name="premium_popup_message">Tüm hutbe arşivine sınırsız erişim sağlamak ve manevi yolculuğunuza kesintisiz devam etmek için Premium abonelik avantajlarını incelemek ister misiniz?</string>
+    <string name="premium">Abone ol</string>
 
 </resources>

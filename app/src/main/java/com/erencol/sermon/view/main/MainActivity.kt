@@ -12,14 +12,14 @@ import com.erencol.sermon.databinding.ActivityMainBinding
 import com.erencol.sermon.view.about.AboutActivity
 import com.erencol.sermon.view.settings.SettingsActivity
 import com.erencol.sermon.view.specialdays.SpecialDaysActivity
-import com.erencol.sermon.view.main.SermonAdapter
-import com.erencol.sermon.view.main.MainViewModel
 import java.util.Observable
 import java.util.Observer
 
 class MainActivity : AppCompatActivity(), Observer {
     private lateinit var mainViewModel: MainViewModel
     private lateinit var binding: ActivityMainBinding
+
+    private lateinit var billingManager: com.erencol.sermon.billing.BillingManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,8 +32,19 @@ class MainActivity : AppCompatActivity(), Observer {
         binding.mainViewModel = mainViewModel
         binding.lifecycleOwner = this
         setSupportActionBar(binding.toolbar)
+        
+        setupBilling()
         setListSermonListview()
         setupObserver(mainViewModel)
+    }
+
+    private fun setupBilling() {
+        billingManager = com.erencol.sermon.billing.BillingManager(this)
+        billingManager.startConnection()
+        billingManager.isPremium.observe(this, { isPremium ->
+            val adapter = binding.sermonsRecyclerview.adapter as? SermonAdapter
+            adapter?.isPremium = isPremium
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -47,6 +58,16 @@ class MainActivity : AppCompatActivity(), Observer {
 
     private fun setListSermonListview() {
         val adapter = SermonAdapter()
+        adapter.onPremiumContentClick = {
+             androidx.appcompat.app.AlertDialog.Builder(this)
+                .setTitle(getString(R.string.premium_popup_title))
+                .setMessage(getString(R.string.premium_popup_message))
+                .setPositiveButton(getString(R.string.analyze)) { _, _ ->
+                    billingManager.launchPurchaseFlow(this)
+                }
+                .setNegativeButton(getString(R.string.later), null)
+                .show()
+        }
         binding.sermonsRecyclerview.adapter = adapter
         binding.sermonsRecyclerview.layoutManager = LinearLayoutManager(this)
         mainViewModel.getSermons()

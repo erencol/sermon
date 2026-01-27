@@ -14,7 +14,6 @@ import com.erencol.sermon.model.Sermon
 import com.erencol.sermon.view.about.AboutActivity
 import com.erencol.sermon.view.settings.SettingsActivity
 import com.erencol.sermon.view.specialdays.SpecialDaysActivity
-import com.erencol.sermon.view.reading.ReadingViewModel
 import com.google.android.material.appbar.CollapsingToolbarLayout
 
 class ReadingActivity : AppCompatActivity() {
