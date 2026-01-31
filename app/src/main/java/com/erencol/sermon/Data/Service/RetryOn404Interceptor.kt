@@ -16,11 +16,9 @@ class RetryOn404Interceptor : Interceptor {
         val request = chain.request()
         val response = chain.proceed(request)
 
-        if (response.code == 404) {
-            response.close()
-
-            val url = request.url
-            val path = url.encodedPath
+        if (response.code() == 404) {
+            val url = request.url()
+            val path = url.encodedPath()
 
             val matcher = DATE_PATTERN.matcher(path)
             if (matcher.find()) {
@@ -48,6 +46,7 @@ class RetryOn404Interceptor : Interceptor {
                         .url(newUrl)
                         .build()
 
+                    response.close()
                     return chain.proceed(newRequest)
 
                 } catch (e: NumberFormatException) {

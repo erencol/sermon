@@ -6,14 +6,14 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.android.billingclient.api.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.erencol.sermon.fcm.FirebaseTopicManager
 
-class BillingManager(private val context: Context) : PurchasesUpdatedListener {
+class BillingManager(
+    private val context: Context,
+    private val firebaseTopicManager: FirebaseTopicManager
+) : PurchasesUpdatedListener {
 
-    private val _isPremium = MutableLiveData<Boolean>(false)
+    private val _isPremium = MutableLiveData(false)
     val isPremium: LiveData<Boolean> = _isPremium
 
     private val billingClient = BillingClient.newBuilder(context)
@@ -74,6 +74,19 @@ class BillingManager(private val context: Context) : PurchasesUpdatedListener {
                 break
             }
         }
+        
+        // Premium durumu değiştiyse FCM topic aboneliğini güncelle
+        val wasPremium = _isPremium.value ?: false
+        if (hasPremium && !wasPremium) {
+            // Yeni premium kullanıcı - bildirim kanalına abone ol
+            Log.d(TAG, "New premium user detected - subscribing to FCM topic")
+            firebaseTopicManager.subscribeToSermonsTopic()
+        } else if (!hasPremium && wasPremium) {
+            // Premium iptal edildi - bildirim kanalından çık
+            Log.d(TAG, "Premium cancelled - unsubscribing from FCM topic")
+            firebaseTopicManager.unsubscribeFromSermonsTopic()
+        }
+        
         _isPremium.postValue(hasPremium)
         Log.d(TAG, "Is Premium: $hasPremium")
     }

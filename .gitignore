@@ -7,3 +7,6 @@
 /.gradle/8.14.3/fileHashes/fileHashes.lock
 /build/reports/problems/problems-report.html
 /.idea/deploymentTargetSelector.xml
+
+# Firebase
+google-services.json

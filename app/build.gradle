@@ -1,41 +1,50 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'org.jetbrains.kotlin.plugin.compose'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'org.jetbrains.kotlin.plugin.compose'
+}
 
 android {
-    compileSdkVersion 36
     namespace 'com.erencol.sermon'
+    compileSdk 36
+
     defaultConfig {
         applicationId "com.erencol.sermon"
-        minSdkVersion 26
+        minSdk 26
         targetSdk 35
-        versionCode 17
+        versionCode 18
         versionName "1.0.11"
         multiDexEnabled true
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    kotlinOptions {
-        jvmTarget = "17"
-    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
-    dataBinding {
-        enabled = true
+
+    kotlinOptions {
+        jvmTarget = "17"
     }
+
     buildFeatures {
+        dataBinding true
         compose true
     }
 
-    lintOptions {
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.8"
+    }
+
+    lint {
         checkReleaseBuilds false
         abortOnError false
     }
@@ -45,13 +54,13 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     // AndroidX Core ve AppCompat
-    implementation 'androidx.core:core-ktx:1.17.0'
-    implementation 'androidx.appcompat:appcompat:1.7.1'
+    implementation 'androidx.core:core-ktx:1.13.1'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
 
     // Compose
     def composeBom = platform('androidx.compose:compose-bom:2024.02.00')
     implementation composeBom
-    implementation 'androidx.activity:activity-compose:1.8.2'
+    implementation 'androidx.activity:activity-compose:1.9.0'
     implementation 'androidx.compose.ui:ui'
     implementation 'androidx.compose.ui:ui-graphics'
     implementation 'androidx.compose.ui:ui-tooling-preview'
@@ -59,23 +68,20 @@ dependencies {
     debugImplementation 'androidx.compose.ui:ui-tooling'
 
     // Material Components
-    implementation "com.google.android.material:material:1.10.0"
+    implementation "com.google.android.material:material:1.12.0"
 
     // Lifecycle
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.9.2'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.9.2'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.8.7'
 
-    // CardView
+    // CardView & RecyclerView
     implementation 'androidx.cardview:cardview:1.0.0'
-
-    // RecyclerView
-    implementation 'androidx.recyclerview:recyclerview:1.4.0'
+    implementation 'androidx.recyclerview:recyclerview:1.3.2'
 
     // Retrofit
-    implementation 'com.squareup.retrofit2:retrofit:3.0.0'
-    implementation 'com.squareup.retrofit2:converter-gson:3.0.0'
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:3.0.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
 
     // RXJava
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
@@ -83,22 +89,26 @@ dependencies {
 
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.16.0'
-    implementation 'androidx.test.ext:junit:1.3.0'
-    implementation 'androidx.activity:activity:1.8.0'
-    implementation 'com.google.android.gms:play-services-location:21.3.0'
     kapt 'com.github.bumptech.glide:compiler:4.16.0'
 
     // Navigation
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.9.2'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.9.2'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.8.5'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.8.5'
 
     // Kotlin Standard Library
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.activity:activity:1.9.0'
+    implementation 'com.google.android.gms:play-services-location:21.3.0'
 
     // In-App Review
     implementation 'com.google.android.play:review-ktx:2.0.2'
+
+    // Firebase
+    implementation platform('com.google.firebase:firebase-bom:33.7.0')
+    implementation 'com.google.firebase:firebase-messaging-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 
     // Testler
     testImplementation 'junit:junit:4.13.2'
@@ -106,5 +116,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
 
     // Google Play Billing
-    implementation 'com.android.billingclient:billing-ktx:7.0.0'
+    implementation 'com.android.billingclient:billing-ktx:7.1.1'
 }
+
+apply plugin: 'com.google.gms.google-services'
