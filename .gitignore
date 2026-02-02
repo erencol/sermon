@@ -10,3 +10,30 @@
 
 # Firebase
 google-services.json
+/app/release/baselineProfiles/0/app-release.dm
+/app/release/baselineProfiles/1/app-release.dm
+/.gradle/8.7/checksums/checksums.lock
+/.gradle/8.9/checksums/checksums.lock
+/.gradle/8.9/executionHistory/executionHistory.bin
+/.gradle/8.9/executionHistory/executionHistory.lock
+/FCM_IMPLEMENTATION_CHECKLIST.md
+/FCM_SETUP_GUIDE.md
+/.gradle/8.9/fileHashes/fileHashes.bin
+/.gradle/8.7/fileHashes/fileHashes.lock
+/.gradle/8.9/fileHashes/fileHashes.lock
+/.gradle/8.7/dependencies-accessors/gc.properties
+/.gradle/8.7/gc.properties
+/.gradle/8.9/dependencies-accessors/gc.properties
+/.gradle/8.9/gc.properties
+/app/google-services.json.template
+/.gradle/8.7/fileChanges/last-build.bin
+/.gradle/8.9/fileChanges/last-build.bin
+/.gradle/8.7/checksums/md5-checksums.bin
+/.gradle/8.9/checksums/md5-checksums.bin
+/app/release/output-metadata.json
+/PREMIUM_FCM_INTEGRATION.md
+/QUICK_START.md
+/.gradle/8.9/fileHashes/resourceHashesCache.bin
+/send_notification.py
+/.gradle/8.7/checksums/sha1-checksums.bin
+/.gradle/8.9/checksums/sha1-checksums.bin
