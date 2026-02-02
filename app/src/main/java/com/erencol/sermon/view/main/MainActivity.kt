@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -49,6 +50,20 @@ class MainActivity : AppCompatActivity(), Observer {
         setupFirebaseMessaging()
         setListSermonListview()
         setupObserver(mainViewModel)
+        setupFab()
+    }
+
+    private fun setupFab() {
+        binding.fabPremium.setOnClickListener {
+            androidx.appcompat.app.AlertDialog.Builder(this)
+                .setTitle(getString(R.string.premium_popup_title))
+                .setMessage(getString(R.string.premium_popup_message))
+                .setPositiveButton(getString(R.string.analyze)) { _, _ ->
+                    billingManager.launchPurchaseFlow(this)
+                }
+                .setNegativeButton(getString(R.string.later), null)
+                .show()
+        }
     }
 
     private fun setupBilling() {
@@ -61,6 +76,7 @@ class MainActivity : AppCompatActivity(), Observer {
         billingManager.isPremium.observe(this, { isPremium ->
             val adapter = binding.sermonsRecyclerview.adapter as? SermonAdapter
             adapter?.isPremium = isPremium
+            binding.fabPremium.visibility = if (isPremium) View.GONE else View.VISIBLE
         })
     }
 

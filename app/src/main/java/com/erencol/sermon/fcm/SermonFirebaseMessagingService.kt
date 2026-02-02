@@ -18,8 +18,8 @@ class SermonFirebaseMessagingService : FirebaseMessagingService() {
     companion object {
         private const val TAG = "SermonFCMService"
         private const val CHANNEL_ID = "sermon_notifications"
-        private const val CHANNEL_NAME = "Hutbe Bildirimleri"
-        private const val CHANNEL_DESCRIPTION = "Yeni hutbe eklendiğinde bildirim alın"
+        private const val CHANNEL_NAME = "Hutbe Bildirimleri - Premium"
+        private const val CHANNEL_DESCRIPTION = "Yeni hutbe eklendiğinde bildirim alın. (Premium'a dahildir.)"
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {

@@ -13,4 +13,5 @@
     <color name="green">#11C72A</color>
     <color name="trans">#00000000</color>
     <color name="white">#ffffffff</color>
+    <color name="premium">#ffde21</color>
 </resources>
