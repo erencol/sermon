@@ -23,14 +23,12 @@ class FirebaseTopicManager(private val context: Context) {
      */
     fun subscribeToSermonsTopic() {
         if (isSubscribed()) {
-            Log.d(TAG, "Already subscribed to sermons topic")
             return
         }
 
         FirebaseMessaging.getInstance().subscribeToTopic(TOPIC_SERMONS)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Log.d(TAG, "Successfully subscribed to sermons topic")
                     saveSubscriptionStatus(true)
                 } else {
                     Log.e(TAG, "Failed to subscribe to sermons topic", task.exception)
@@ -45,7 +43,6 @@ class FirebaseTopicManager(private val context: Context) {
         FirebaseMessaging.getInstance().unsubscribeFromTopic(TOPIC_SERMONS)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Log.d(TAG, "Successfully unsubscribed from sermons topic")
                     saveSubscriptionStatus(false)
                 } else {
                     Log.e(TAG, "Failed to unsubscribe from sermons topic", task.exception)
@@ -67,7 +64,6 @@ class FirebaseTopicManager(private val context: Context) {
         FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val token = task.result
-                Log.d(TAG, "FCM Token: $token")
                 onTokenReceived(token)
             } else {
                 Log.e(TAG, "Failed to get FCM token", task.exception)
