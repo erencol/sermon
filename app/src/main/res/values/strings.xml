@@ -57,7 +57,7 @@ Aenean in arcu laoreet, gravida orci et, faucibus velit. Etiam finibus viverra t
     <string name="analyze">İncele</string>
     <string name="later">Daha Sonra</string>
     <string name="premium_popup_title">Aylık Abonelik Oluşturun</string>
-    <string name="premium_popup_message">Tüm hutbe arşivine sınırsız erişim sağlamak ve geliştiriciye katkıda bulunmak için abone olabilirsiniz.</string>
+    <string name="premium_popup_message">Tüm hutbe arşivine sınırsız erişim sağlamak ve hutbe eklendiğinde bildirim almak için abone olun.</string>
     <string name="premium">Abone ol</string>
 
 </resources>
