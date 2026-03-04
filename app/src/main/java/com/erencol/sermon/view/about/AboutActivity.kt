@@ -113,6 +113,17 @@ fun AboutScreen(modifier: Modifier = Modifier) {
             contentDescription = stringResource(id = R.string.app2_name)
         )
 
+        Spacer(modifier = Modifier.height(12.dp))
+
+        // Voice Notes App Button
+        AppLinkButton(
+            imageRes = R.drawable.minibo,
+            appName = stringResource(id = R.string.app3_name), // Using app2_name based on XML logic
+            url = "https://play.google.com/store/apps/details?id=com.mobizoe.minibo",
+            contentDescription = stringResource(id = R.string.app3_name)
+        )
+
+
         Spacer(modifier = Modifier.height(32.dp))
 
     }

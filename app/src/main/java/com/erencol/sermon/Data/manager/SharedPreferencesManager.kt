@@ -9,6 +9,9 @@ class SharedPreferencesManager(context: Context) {
     val DEFAULT_FONT_SIZE = 4
     companion object {
         private const val PREFS_NAME = "SermonPrefs"
+        const val KEY_LAST_VERSION_CODE = "last_version_code"
+        const val KEY_LAUNCH_COUNT = "launch_count"
+        const val KEY_RATE_SHOWN_PREFIX = "rate_shown_v_"
         private var instance: SharedPreferencesManager? = null
 
         fun getInstance(context: Context): SharedPreferencesManager {

@@ -9,12 +9,14 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.erencol.sermon.R
+import com.erencol.sermon.data.manager.SharedPreferencesManager
 import com.erencol.sermon.databinding.ActivityMainBinding
 import com.erencol.sermon.fcm.FirebaseTopicManager
 import com.erencol.sermon.view.about.AboutActivity
@@ -37,6 +39,7 @@ class MainActivity : AppCompatActivity(), Observer {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initDataBinding()
+        checkRateUsDialog()
     }
 
     private fun initDataBinding() {
@@ -184,6 +187,77 @@ class MainActivity : AppCompatActivity(), Observer {
         if (observable is MainViewModel) {
             val sermonAdapter = binding.sermonsRecyclerview.adapter as SermonAdapter?
             sermonAdapter?.setSermonList(observable.sermonList.value)
+        }
+    }
+
+    private fun checkRateUsDialog() {
+        val prefs = SharedPreferencesManager.getInstance(this)
+        val currentVersionCode = try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                packageManager.getPackageInfo(packageName, 0).longVersionCode.toInt()
+            } else {
+                @Suppress("DEPRECATION")
+                packageManager.getPackageInfo(packageName, 0).versionCode
+            }
+        } catch (e: Exception) {
+            0
+        }
+
+        val lastVersionCode = prefs.getIntForKey(SharedPreferencesManager.KEY_LAST_VERSION_CODE, 0)
+        val launchCount = prefs.getIntForKey(SharedPreferencesManager.KEY_LAUNCH_COUNT, 0)
+        val shownKey = SharedPreferencesManager.KEY_RATE_SHOWN_PREFIX + currentVersionCode
+        val isShownForThisVersion = prefs.getBoolean(shownKey, false)
+
+        if (isShownForThisVersion) return
+
+        if (lastVersionCode == 0) {
+            // First time install initialization
+            prefs.putIntForKey(SharedPreferencesManager.KEY_LAST_VERSION_CODE, currentVersionCode)
+            prefs.putIntForKey(SharedPreferencesManager.KEY_LAUNCH_COUNT, 1)
+        } else if (lastVersionCode == currentVersionCode) {
+            // Ongoing session for the same version
+            val newCount = launchCount + 1
+            prefs.putIntForKey(SharedPreferencesManager.KEY_LAUNCH_COUNT, newCount)
+            if (newCount == 3) {
+                showRateUsDialog(shownKey)
+            }
+        } else if (lastVersionCode < currentVersionCode) {
+            // Updated user
+            showRateUsDialog(shownKey)
+            prefs.putIntForKey(SharedPreferencesManager.KEY_LAST_VERSION_CODE, currentVersionCode)
+        }
+    }
+
+    private fun showRateUsDialog(shownKey: String) {
+        val view = layoutInflater.inflate(R.layout.dialog_rate_us, null)
+        val textView = view.findViewById<android.widget.TextView>(R.id.textViewMessage)
+        textView.text = getString(R.string.rate_us_message, getString(R.string.app_name))
+
+        androidx.appcompat.app.AlertDialog.Builder(this)
+            .setView(view)
+            .setPositiveButton(getString(R.string.ok)) { _, _ ->
+                SharedPreferencesManager.getInstance(this).putBoolean(shownKey, true)
+                openPlayStore()
+            }
+            .setNegativeButton(getString(R.string.cancel)) { dialog, _ ->
+                SharedPreferencesManager.getInstance(this).putBoolean(shownKey, true)
+                dialog.dismiss()
+            }
+            .setCancelable(false)
+            .show()
+    }
+
+    private fun openPlayStore() {
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            data = Uri.parse("market://details?id=$packageName")
+        }
+        try {
+            startActivity(intent)
+        } catch (e: Exception) {
+            val webIntent = Intent(Intent.ACTION_VIEW).apply {
+                data = Uri.parse("https://play.google.com/store/apps/details?id=$packageName")
+            }
+            startActivity(webIntent)
         }
     }
 }
