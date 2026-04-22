@@ -26,7 +26,7 @@ class SermonAdapter : RecyclerView.Adapter<SermonViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: SermonViewHolder, position: Int) {
-        val isLocked = !isPremium && position >= 5
+        val isLocked = false
         holder.bindSermon(sermonList[position], isLocked, onPremiumContentClick)
     }
 

@@ -14,6 +14,10 @@ import com.erencol.sermon.model.Sermon
 import com.erencol.sermon.view.about.AboutActivity
 import com.erencol.sermon.view.settings.SettingsActivity
 import com.erencol.sermon.view.specialdays.SpecialDaysActivity
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.erencol.sermon.data.manager.PremiumManager
+import android.view.View
 import com.google.android.material.appbar.CollapsingToolbarLayout
 
 class ReadingActivity : AppCompatActivity() {
@@ -29,6 +33,23 @@ class ReadingActivity : AppCompatActivity() {
         getExtrasFromIntent()
         setFontSize()
         sermon?.title?.let { setToolbar(it) }
+        
+        setupAds()
+    }
+
+    private fun setupAds() {
+        val premiumManager = PremiumManager.getInstance(this)
+        val adViewTop = findViewById<AdView>(R.id.adViewTop)
+        val adViewBottom = findViewById<AdView>(R.id.adViewBottom)
+
+        if (!premiumManager.isPremium) {
+            val adRequest = AdRequest.Builder().build()
+            adViewTop.loadAd(adRequest)
+            adViewBottom.loadAd(adRequest)
+        } else {
+            adViewTop.visibility = View.GONE
+            adViewBottom.visibility = View.GONE
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

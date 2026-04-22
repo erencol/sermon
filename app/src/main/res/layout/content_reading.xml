@@ -24,8 +24,7 @@
                 android:textSize="@dimen/text_size"
                 android:id="@+id/text"
                 android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
-                android:text="@string/content_text_one" />
+                android:layout_marginRight="12dp" />
 
         </LinearLayout>
 

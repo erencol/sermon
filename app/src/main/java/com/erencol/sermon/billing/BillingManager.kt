@@ -87,6 +87,9 @@ class BillingManager(
             firebaseTopicManager.unsubscribeFromSermonsTopic()
         }
         
+        val premiumManager = com.erencol.sermon.data.manager.PremiumManager.getInstance(context)
+        premiumManager.isPremium = hasPremium
+
         _isPremium.postValue(hasPremium)
         Log.d(TAG, "Is Premium: $hasPremium")
     }
