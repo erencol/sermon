@@ -49,11 +49,13 @@ class ReadingActivity : AppCompatActivity() {
             return
         }
 
-        if (BuildConfig.DEBUG) {
-            val testBannerId = "ca-app-pub-3940256099942544/6300978111"
-            adViewTop.adUnitId = testBannerId
-            adViewBottom.adUnitId = testBannerId
+        val bannerAdUnitId = if (BuildConfig.DEBUG) {
+            "ca-app-pub-3940256099942544/6300978111"
+        } else {
+            "ca-app-pub-8861526088825112/4179675930"
         }
+        adViewTop.adUnitId = bannerAdUnitId
+        adViewBottom.adUnitId = bannerAdUnitId
 
         val adRequest = AdRequest.Builder().build()
         adViewTop.loadAd(adRequest)
