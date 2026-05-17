@@ -7,6 +7,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
+import com.erencol.sermon.BuildConfig
 import com.erencol.sermon.R
 import com.erencol.sermon.data.manager.SharedPreferencesManager
 import com.erencol.sermon.databinding.ActivityReadingBinding
@@ -42,14 +43,21 @@ class ReadingActivity : AppCompatActivity() {
         val adViewTop = findViewById<AdView>(R.id.adViewTop)
         val adViewBottom = findViewById<AdView>(R.id.adViewBottom)
 
-        if (!premiumManager.isPremium) {
-            val adRequest = AdRequest.Builder().build()
-            adViewTop.loadAd(adRequest)
-            adViewBottom.loadAd(adRequest)
-        } else {
+        if (premiumManager.isPremium) {
             adViewTop.visibility = View.GONE
             adViewBottom.visibility = View.GONE
+            return
         }
+
+        if (BuildConfig.DEBUG) {
+            val testBannerId = "ca-app-pub-3940256099942544/6300978111"
+            adViewTop.adUnitId = testBannerId
+            adViewBottom.adUnitId = testBannerId
+        }
+
+        val adRequest = AdRequest.Builder().build()
+        adViewTop.loadAd(adRequest)
+        adViewBottom.loadAd(adRequest)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
