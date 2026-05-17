@@ -16,6 +16,7 @@ import com.erencol.sermon.view.about.AboutActivity
 import com.erencol.sermon.view.settings.SettingsActivity
 import com.erencol.sermon.view.specialdays.SpecialDaysActivity
 import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
 import com.erencol.sermon.data.manager.PremiumManager
 import android.view.View
@@ -54,7 +55,9 @@ class ReadingActivity : AppCompatActivity() {
         } else {
             "ca-app-pub-8861526088825112/4179675930"
         }
+        adViewTop.setAdSize(AdSize.BANNER)
         adViewTop.adUnitId = bannerAdUnitId
+        adViewBottom.setAdSize(AdSize.BANNER)
         adViewBottom.adUnitId = bannerAdUnitId
 
         val adRequest = AdRequest.Builder().build()
